@@ -8,17 +8,26 @@ import { ThemeToggle } from "./theme-toggle";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const scrollToSection = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    id: string
+  ) => {
+    event.preventDefault();
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false); // Close mobile menu after clicking
+  };
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 bg-background/30 backdrop-blur-lg">
+    <nav className="sticky left-0 right-0 top-0 z-50 bg-background/30 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
         <Link href="/" className="flex items-center space-x-2">
-          {/* <div className="h-8 w-8 rounded-full bg-primary/20 p-1">
-            <div className="h-full w-full rounded-full bg-primary"></div>
-          </div> */}
           <span className="text-xl font-bold text-foreground">
             Method Manav
           </span>
@@ -26,30 +35,40 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center space-x-8 md:flex">
-          <Link
+          <a
             href="#projects"
+            onClick={(e) => scrollToSection(e, "projects")}
             className="text-foreground/80 transition-colors hover:text-foreground"
           >
             Projects
-          </Link>
-          <Link
+          </a>
+          <a
             href="#about"
+            onClick={(e) => scrollToSection(e, "about")}
             className="text-foreground/80 transition-colors hover:text-foreground"
           >
             About
-          </Link>
-          <Link
+          </a>
+          <a
             href="#skills"
+            onClick={(e) => scrollToSection(e, "skills")}
             className="text-foreground/80 transition-colors hover:text-foreground"
           >
             Skills
-          </Link>
+          </a>
           <Link
+            href="/blog"
+            className="text-foreground/80 transition-colors hover:text-foreground"
+          >
+            Blog
+          </Link>
+          <a
             href="#contact"
+            onClick={(e) => scrollToSection(e, "contact")}
             className="text-foreground/80 transition-colors hover:text-foreground"
           >
             Contact
-          </Link>
+          </a>
           <ThemeToggle />
         </div>
 
@@ -69,34 +88,40 @@ export function Navbar() {
       {isOpen && (
         <div className="absolute left-0 right-0 z-20 bg-background/95 p-4 backdrop-blur-lg md:hidden">
           <div className="flex flex-col space-y-4">
-            <Link
+            <a
               href="#projects"
+              onClick={(e) => scrollToSection(e, "projects")}
               className="p-2 text-foreground/80 transition-colors hover:text-foreground"
-              onClick={() => setIsOpen(false)}
             >
               Projects
-            </Link>
-            <Link
+            </a>
+            <a
               href="#about"
+              onClick={(e) => scrollToSection(e, "about")}
               className="p-2 text-foreground/80 transition-colors hover:text-foreground"
-              onClick={() => setIsOpen(false)}
             >
               About
-            </Link>
-            <Link
+            </a>
+            <a
               href="#skills"
+              onClick={(e) => scrollToSection(e, "skills")}
               className="p-2 text-foreground/80 transition-colors hover:text-foreground"
-              onClick={() => setIsOpen(false)}
             >
               Skills
-            </Link>
+            </a>
             <Link
-              href="#contact"
+              href="/blog"
               className="p-2 text-foreground/80 transition-colors hover:text-foreground"
-              onClick={() => setIsOpen(false)}
+            >
+              Blog
+            </Link>
+            <a
+              href="#contact"
+              onClick={(e) => scrollToSection(e, "contact")}
+              className="p-2 text-foreground/80 transition-colors hover:text-foreground"
             >
               Contact
-            </Link>
+            </a>
           </div>
         </div>
       )}
