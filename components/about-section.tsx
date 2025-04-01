@@ -50,11 +50,11 @@ export function AboutSection() {
               <div className="mb-1 flex items-center">
                 <Briefcase className="mr-2 h-4 w-4 text-primary" />
                 <h4 className="text-lg font-medium text-foreground">
-                  Senior Developer
+                  Junior Backend Developer
                 </h4>
               </div>
               <p className="mb-1 text-sm text-primary">
-                2021 - Present • TechNova Inc.
+                2023 - Present • Elemensis Softech LLP.
               </p>
               <p className="text-sm text-foreground/80">
                 Leading frontend development for enterprise applications,
@@ -67,11 +67,11 @@ export function AboutSection() {
               <div className="mb-1 flex items-center">
                 <Briefcase className="mr-2 h-4 w-4 text-primary" />
                 <h4 className="text-lg font-medium text-foreground">
-                  Web Developer
+                  UI/UX Intern
                 </h4>
               </div>
               <p className="mb-1 text-sm text-primary">
-                2018 - 2021 • DigitalCraft Studio
+                2023 - 2024 • Tata Strive
               </p>
               <p className="text-sm text-foreground/80">
                 Developed responsive websites and web applications for clients
@@ -84,12 +84,10 @@ export function AboutSection() {
               <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-primary"></div>
               <div className="mb-1 flex items-center">
                 <GraduationCap className="mr-2 h-4 w-4 text-primary" />
-                <h4 className="text-lg font-medium text-foreground">
-                  MSc Computer Science
-                </h4>
+                <h4 className="text-lg font-medium text-foreground">BCA</h4>
               </div>
               <p className="mb-1 text-sm text-primary">
-                2016 - 2018 • Tech University
+                2016 - 2018 • Bhagwan Mahavir University
               </p>
               <p className="text-sm text-foreground/80">
                 Specialized in Human-Computer Interaction and Web Technologies.

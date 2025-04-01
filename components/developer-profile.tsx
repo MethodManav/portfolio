@@ -54,7 +54,7 @@ export function DeveloperProfile() {
       </div>
 
       {/* Profile Image */}
-      <div className="relative flex-shrink-0 h-72 w-72 overflow-hidden rounded-full border-4 border-primary/20 md:h-80 md:w-80 lg:h-96 lg:w-96">
+      <div className="relative flex-shrink-0 h-72 w-72 left-52 overflow-hidden rounded-full border-4 border-primary/20 md:h-80 md:w-80 lg:h-96 lg:w-96">
         <Image
           src="/Profile.jpeg?height=384&width=384"
           alt="Developer profile"
