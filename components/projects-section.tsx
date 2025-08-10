@@ -50,32 +50,26 @@ const projects = [
     technologies: ["Next.js", "Ethers.js", "Solana Web3.js"],
   },
   {
-    title: "Stellar Chat",
+    title: "Java Single & Multi-threaded Server",
     description:
-      "Real-time chat application with message encryption, file sharing, and user presence indicators.",
+      "A server application demonstrating single-threaded and multi-threaded architectures in Java for handling client requests.",
     longDescription:
-      "Stellar Chat is a secure messaging platform built with React and Firebase. It offers end-to-end encrypted messaging, real-time user presence indicators, file and media sharing capabilities, and group chat functionality with admin controls.",
-    image: "/placeholder.svg?height=340&width=600",
-    demoUrl: "https://example.com",
-    githubUrl: "https://github.com",
-    tags: ["React", "Firebase", "WebSockets", "Styled Components"],
+      "This project implements both single-threaded and multi-threaded server models in Java to illustrate their performance and concurrency differences. It establishes socket connections to handle client requests, enabling the processing of multiple clients sequentially (single-threaded) or concurrently (multi-threaded) using Java's multithreading capabilities. The implementation showcases socket creation, I/O streams, and thread management with a focus on efficiency and scalability.",
+    image: "/java-server.png?height=340&width=600",
+    demoUrl: "https://github.com/MethodManav/single-thread-server",
+    githubUrl: "https://github.com/MethodManav/single-thread-server",
+    tags: ["Java", "Sockets", "Networking", "Multithreading"],
     features: [
-      "End-to-end encrypted messaging for privacy",
-      "Real-time user presence and typing indicators",
-      "File and media sharing with preview capabilities",
-      "Group chat with admin controls and moderation",
-      "Message search and conversation history",
+      "Single-threaded server for sequential client request handling",
+      "Multi-threaded server for concurrent request processing",
+      "Socket programming for TCP communication",
+      "I/O stream handling for request/response exchange",
+      "Demonstrates performance differences between server models",
     ],
-    technologies: [
-      "React",
-      "Firebase",
-      "WebSockets",
-      "Styled Components",
-      "Crypto-JS",
-    ],
-    teamSize: 2,
-    duration: "3 months",
-    role: "Frontend Developer",
+    technologies: ["Java", "Socket Programming", "Threads", "I/O Streams"],
+    teamSize: 1,
+    duration: "2 weeks", // Adjust based on your actual time
+    role: "Java Developer",
   },
 ];
 
