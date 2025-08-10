@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Heart } from "lucide-react";
+import { Briefcase, GraduationCap } from "lucide-react";
 
 export function AboutSection() {
   return (

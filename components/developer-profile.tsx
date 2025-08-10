@@ -3,9 +3,9 @@ import { Github, Linkedin, Twitter } from "lucide-react";
 
 export function DeveloperProfile() {
   return (
-    <div className="flex flex-col items-center text-center md:flex-row md:items-center md:text-left md:gap-12 lg:gap-20">
+    <div className="grid grid-cols-1 items-center gap-10 text-center md:grid-cols-2 md:text-left md:gap-12 lg:gap-20">
       {/* Profile Text */}
-      <div className="max-w-xl">
+      <div className="max-w-xl mx-auto md:mx-0">
         <h1 className="mb-2 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Manav Behera
         </h1>
@@ -54,12 +54,13 @@ export function DeveloperProfile() {
       </div>
 
       {/* Profile Image */}
-      <div className="relative flex-shrink-0 h-72 w-72 left-52 overflow-hidden rounded-full border-4 border-primary/20 md:h-80 md:w-80 lg:h-96 lg:w-96">
+      <div className="relative overflow-hidden rounded-full border-4 border-primary/20 h-40 w-40 sm:h-56 sm:w-56 md:h-72 md:w-72 lg:h-96 lg:w-96 justify-self-center md:justify-self-end">
         <Image
           src="/Profile.jpeg?height=384&width=384"
           alt="Developer profile"
           fill
           className="object-cover"
+          sizes="(min-width: 1024px) 24rem, (min-width: 768px) 18rem, (min-width: 640px) 14rem, 10rem"
           priority
         />
       </div>

@@ -15,9 +15,24 @@ type SkillCategory = {
 };
 
 export function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState<string>("Frontend");
+  const [activeCategory, setActiveCategory] = useState<string>("Backend");
 
   const categories: SkillCategory[] = [
+    {
+      name: "Backend",
+      icon: <Database className="h-5 w-5" />,
+      skills: [
+        { name: "Node.js", level: 85 },
+        { name: "Express", level: 80 },
+        { name: "MongoDB", level: 75 },
+        { name: "PostgreSQL", level: 70 },
+        { name: "GraphQL", level: 50 },
+        { name: "Redis", level: 60 },
+        { name: "Java + Spring Boot", level: 50 },
+        { name: "Python + FastApi", level: 40 },
+        { name: "Go lang", level: 60 },
+      ],
+    },
     {
       name: "Frontend",
       icon: <Layout className="h-5 w-5" />,
@@ -29,17 +44,7 @@ export function SkillsSection() {
         { name: "HTML/CSS", level: 95 },
       ],
     },
-    {
-      name: "Backend",
-      icon: <Database className="h-5 w-5" />,
-      skills: [
-        { name: "Node.js", level: 85 },
-        { name: "Express", level: 80 },
-        { name: "MongoDB", level: 75 },
-        { name: "PostgreSQL", level: 70 },
-        { name: "GraphQL", level: 65 },
-      ],
-    },
+
     {
       name: "Tools",
       icon: <Settings className="h-5 w-5" />,
@@ -47,7 +52,7 @@ export function SkillsSection() {
         { name: "Git", level: 90 },
         { name: "Docker", level: 70 },
         { name: "CI/CD", level: 75 },
-        { name: "Jest", level: 80 },
+        { name: "Jest", level: 60 },
         { name: "Webpack", level: 65 },
       ],
     },
