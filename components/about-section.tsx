@@ -54,7 +54,7 @@ export function AboutSection() {
                 </h4>
               </div>
               <p className="mb-1 text-sm text-primary">
-                2023 - Present • Elemensis Softech LLP.
+                2024 - Present • Elemensis Softech LLP.
               </p>
               <p className="text-sm text-foreground/80">
                 Leading frontend development for enterprise applications,
@@ -87,25 +87,10 @@ export function AboutSection() {
                 <h4 className="text-lg font-medium text-foreground">BCA</h4>
               </div>
               <p className="mb-1 text-sm text-primary">
-                2016 - 2018 • Bhagwan Mahavir University
+                2021 - 2024 • Bhagwan Mahavir University
               </p>
               <p className="text-sm text-foreground/80">
                 Specialized in Human-Computer Interaction and Web Technologies.
-              </p>
-            </div>
-
-            <div className="relative border-l border-primary/30 pl-6">
-              <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-primary"></div>
-              <div className="mb-1 flex items-center">
-                <Heart className="mr-2 h-4 w-4 text-primary" />
-                <h4 className="text-lg font-medium text-foreground">
-                  First Line of Code
-                </h4>
-              </div>
-              <p className="mb-1 text-sm text-primary">2012</p>
-              <p className="text-sm text-foreground/80">
-                {`Wrote my first "Hello, World!" and fell in love with
-                programming.`}
               </p>
             </div>
           </div>
