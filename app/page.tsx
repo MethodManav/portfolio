@@ -41,8 +41,7 @@ export default function Home() {
             <ProjectsSection />
           </section>
 
-          {/* Blog section
-          <section className="container mx-auto px-4">
+          {/* <section className="container mx-auto px-4">
             <BlogSection />
           </section> */}
 

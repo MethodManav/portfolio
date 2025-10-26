@@ -13,10 +13,7 @@ export function DeveloperProfile() {
           Full-Stack Developer & UI/UX Enthusiast
         </h2>
         <p className="mb-6 text-foreground/80">
-          {`Backend-Focused Full-Stack Developer passionate about building fast, secure, and scalable systems.
-With 1+ years of experience, I specialize in Node.js, Go (Golang), PostgreSQL, and cloud-native architectures, delivering APIs and services that power data-intensive applications with reliability and performance.
-
-While my core strength lies in backend engineering, I bring a full-stack mindset—crafting clean, accessible UIs with React and Next.js to deliver polished, end-to-end solutions. I thrive in solving complex problems, optimizing systems, and shipping features that make a measurable impact.`}
+          {`Backend-Focused Full-Stack Developer passionate about building fast, secure, and scalable systems. With 1+ years of experience, I specialize in Node.js, Go (Golang), PostgreSQL, and cloud-native architectures, delivering APIs and services that power data-intensive applications with reliability and performance. While my core strength lies in backend engineering, I bring a full-stack mindset—crafting clean, accessible UIs with React and Next.js to deliver polished, end-to-end solutions. I thrive in solving complex problems, optimizing systems, and shipping features that make a measurable impact.`}
         </p>
 
         {/* Social Links */}
@@ -52,7 +49,7 @@ While my core strength lies in backend engineering, I bring a full-stack mindset
       </div>
 
       {/* Profile Image */}
-      <div className="relative overflow-hidden rounded-full border-4 border-primary/20 h-56 w-56 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-96 lg:w-96 justify-self-center md:justify-self-end">
+      <div className="relative overflow-hidden rounded-full border-4 border-primary/20 h-56 w-56 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-96 lg:w-96 justify-self-center md:justify-self-end md:translate-x-6 transform transition-transform">
         <Image
           src="/Profile.jpeg?height=384&width=384"
           alt="Developer profile"
