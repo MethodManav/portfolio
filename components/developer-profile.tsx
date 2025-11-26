@@ -9,9 +9,6 @@ export function DeveloperProfile() {
         <h1 className="mb-2 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Manav Behera
         </h1>
-        <h2 className="mb-4 text-xl text-primary md:text-2xl">
-          Full-Stack Developer & UI/UX Enthusiast
-        </h2>
         <p className="mb-6 text-foreground/80">
           {`Backend-Focused Full-Stack Developer passionate about building fast, secure, and scalable systems. With 1+ years of experience, I specialize in Node.js, Go (Golang), PostgreSQL, and cloud-native architectures, delivering APIs and services that power data-intensive applications with reliability and performance. While my core strength lies in backend engineering, I bring a full-stack mindset—crafting clean, accessible UIs with React and Next.js to deliver polished, end-to-end solutions. I thrive in solving complex problems, optimizing systems, and shipping features that make a measurable impact.`}
         </p>
