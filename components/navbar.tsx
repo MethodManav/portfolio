@@ -57,7 +57,7 @@ export function Navbar() {
             Skills
           </a>
           <Link
-            href="/blog"
+            href="#blog"
             className="text-foreground/80 transition-colors hover:text-foreground"
           >
             Blog

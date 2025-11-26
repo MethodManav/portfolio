@@ -10,6 +10,7 @@ import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
+import { BlogSection } from "@/components/blog-section";
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,10 +41,11 @@ export default function Home() {
           <section className="container mx-auto px-4">
             <ProjectsSection />
           </section>
-
-          {/* <section className="container mx-auto px-4">
+          
+          {/* Blog section */}
+          <section className="container mx-auto px-4">
             <BlogSection />
-          </section> */}
+          </section>
 
           {/* About section */}
           <section className="container mx-auto px-4">
