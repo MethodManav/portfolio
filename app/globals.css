@@ -4,65 +4,72 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Neo-brutalism: flat cream canvas, punchy accents, black ink */
+    --background: 42 60% 95%;
+    --foreground: 0 0% 9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 9%;
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 48 100% 62%;
+    --primary-foreground: 0 0% 9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 174 64% 42%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 42 30% 90%;
+    --muted-foreground: 0 0% 32%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 350 90% 68%;
+    --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --border: 0 0% 9%;
+    --input: 0 0% 9%;
+    --ring: 0 0% 9%;
 
-    --radius: 0.5rem;
+    --lavender: 252 80% 78%;
+    --lavender-foreground: 0 0% 9%;
+
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 24 16% 9%;
+    --foreground: 45 38% 93%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 24 14% 12%;
+    --card-foreground: 45 38% 93%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 24 14% 12%;
+    --popover-foreground: 45 38% 93%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 36 90% 58%;
+    --primary-foreground: 24 16% 9%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 174 55% 45%;
+    --secondary-foreground: 24 16% 9%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 24 12% 16%;
+    --muted-foreground: 35 14% 62%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 350 85% 68%;
+    --accent-foreground: 24 16% 9%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --border: 45 28% 90%;
+    --input: 45 28% 90%;
+    --ring: 45 28% 90%;
+
+    --lavender: 252 70% 74%;
+    --lavender-foreground: 24 16% 9%;
   }
 }
 
@@ -72,6 +79,72 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Neo-brutalism utilities: hard offset shadows + thick borders */
+@layer utilities {
+  .neo-border {
+    border-width: 3px;
+    border-style: solid;
+    border-color: hsl(var(--border));
+  }
+
+  .neo-border-thin {
+    border-width: 2px;
+    border-style: solid;
+    border-color: hsl(var(--border));
+  }
+
+  .neo-shadow-sm {
+    box-shadow: 3px 3px 0 0 hsl(var(--border));
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .neo-shadow {
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .neo-shadow-lg {
+    box-shadow: 10px 10px 0 0 hsl(var(--border));
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .neo-hover:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 0 hsl(var(--border));
+  }
+
+  .neo-hover:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+
+  .neo-hover-sm:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 hsl(var(--border));
+  }
+
+  .neo-hover-sm:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 0 hsl(var(--border));
+  }
+
+  .neo-dot-grid {
+    background-image: radial-gradient(
+      hsl(var(--foreground) / 0.18) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 28px 28px;
+  }
+
+  .bg-lavender {
+    background-color: hsl(var(--lavender));
+  }
+
+  .text-lavender-foreground {
+    color: hsl(var(--lavender-foreground));
   }
 }
 
@@ -121,5 +194,19 @@
   to {
     transform: translateY(0);
   }
+}
+
+@keyframes neo-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -14px;
+  }
+}
+
+.animate-neo-float {
+  animation: neo-float 6s ease-in-out infinite;
 }
 

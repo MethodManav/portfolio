@@ -39,7 +39,7 @@ export function BlogCard({
   return (
     <div
       className={cn(
-        "group overflow-hidden rounded-xl bg-card/30 backdrop-blur-sm transition-all duration-300",
+        "group overflow-hidden rounded-2xl neo-border neo-shadow bg-card transition-all duration-300",
         isExpanded ? "col-span-full" : ""
       )}
     >
@@ -69,7 +69,7 @@ export function BlogCard({
         <div className="p-6">
           {/* Category and date */}
           <div className="mb-3 flex items-center justify-between">
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <span className="rounded-full neo-border-thin bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
               {category}
             </span>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -85,7 +85,7 @@ export function BlogCard({
           </div>
 
           {/* Title */}
-          <h3 className="mb-2 text-xl font-bold text-foreground">{title}</h3>
+          <h3 className="mb-2 text-xl font-extrabold text-foreground">{title}</h3>
 
           {/* Excerpt or Content */}
           <div
@@ -107,7 +107,7 @@ export function BlogCard({
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-foreground/10 px-2 py-1 text-xs font-medium text-foreground/70"
+                  className="rounded-full neo-border-thin bg-lavender px-2 py-1 text-xs font-bold text-lavender-foreground"
                 >
                   #{tag}
                 </span>

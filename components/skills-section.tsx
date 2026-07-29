@@ -3,7 +3,9 @@
 import type React from "react";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Database, Layout, Settings, Terminal, Wand2 } from "lucide-react";
+import { Reveal, RevealGroup, RevealItem } from "./reveal";
 
 type SkillCategory = {
   name: string;
@@ -85,64 +87,88 @@ export function SkillsSection() {
 
   return (
     <section id="skills" className="py-16">
-      <div className="mb-12 text-center">
-        <h2 className="mb-2 text-3xl font-bold text-foreground md:text-4xl">
+      <Reveal className="mb-12 text-center">
+        <h2 className="mb-2 text-3xl font-extrabold uppercase tracking-tight text-foreground md:text-4xl">
           Skills & Expertise
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           My technical skills and areas of expertise in web development and
           design.
         </p>
-      </div>
+      </Reveal>
 
-      <div className="mx-auto max-w-4xl">
+      <Reveal delay={0.1} className="mx-auto max-w-4xl">
         {/* Category tabs */}
         <div className="mb-8 flex flex-wrap justify-center gap-2">
           {categories.map((category) => (
             <button
               key={category.name}
               onClick={() => setActiveCategory(category.name)}
-              className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`relative flex items-center gap-2 rounded-full neo-border neo-shadow-sm neo-hover-sm px-4 py-2 text-sm font-bold uppercase transition-colors ${
                 activeCategory === category.name
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-card/30 text-foreground/70 hover:bg-primary/20 hover:text-foreground"
+                  ? "text-primary-foreground"
+                  : "bg-card text-foreground/70 hover:bg-primary/20 hover:text-foreground"
               }`}
             >
-              {category.icon}
-              {category.name}
+              {activeCategory === category.name && (
+                <motion.span
+                  layoutId="active-skill-pill"
+                  className="absolute inset-0 rounded-full bg-primary"
+                  transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                />
+              )}
+              <span className="relative flex items-center gap-2">
+                {category.icon}
+                {category.name}
+              </span>
             </button>
           ))}
         </div>
 
         {/* Skills bars */}
-        <div className="rounded-xl bg-card/30 p-6 backdrop-blur-sm">
-          <div className="grid gap-6 md:grid-cols-2">
-            {activeSkills.map((skill) => (
-              <div key={skill.name} className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm font-medium text-foreground">
-                    {skill.name}
-                  </span>
-                  <span className="text-sm text-muted-foreground">
-                    {skill.level}%
-                  </span>
+        <div className="rounded-2xl neo-border neo-shadow bg-card p-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="grid gap-6 md:grid-cols-2"
+            >
+              {activeSkills.map((skill, index) => (
+                <div key={skill.name} className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm font-bold text-foreground">
+                      {skill.name}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="h-3 w-full overflow-hidden rounded-full neo-border-thin bg-muted">
+                    <motion.div
+                      className="h-full rounded-full bg-primary"
+                      initial={{ width: "0%" }}
+                      animate={{ width: `${skill.level}%` }}
+                      transition={{
+                        duration: 0.7,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: index * 0.05,
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-background/50">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Additional skills */}
           <div className="mt-8">
-            <h3 className="mb-4 text-lg font-medium text-foreground">
+            <h3 className="mb-4 text-lg font-bold text-foreground">
               Additional Skills
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <RevealGroup className="flex flex-wrap gap-2">
               {[
                 "JavaScript",
                 "CSS3",
@@ -158,17 +184,16 @@ export function SkillsSection() {
                 "Cypress",
                 "Responsive Design",
               ].map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full bg-foreground/10 px-3 py-1 text-xs font-medium text-foreground/80"
-                >
-                  {skill}
-                </span>
+                <RevealItem key={skill} y={12}>
+                  <span className="rounded-full neo-border-thin bg-lavender px-3 py-1 text-xs font-bold text-lavender-foreground">
+                    {skill}
+                  </span>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

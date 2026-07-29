@@ -1,182 +1,151 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
-interface Shape {
+type DoodleShape = {
   id: number;
-  x: number;
-  y: number;
+  kind: "circle" | "semicircle" | "square" | "blob";
+  color: "primary" | "secondary" | "accent" | "lavender";
   size: number;
-  color: string;
-  speed: number;
-  opacity: number;
-  blur: number;
-  type: "nebula" | "planet" | "comet";
-  rotation: number;
-  rotationSpeed: number;
+  top?: string;
+  bottom?: string;
+  left?: string;
+  right?: string;
+  rotate: number;
+};
+
+const shapes: DoodleShape[] = [
+  { id: 1, kind: "semicircle", color: "secondary", size: 90, top: "18%", left: "4%", rotate: -20 },
+  { id: 2, kind: "circle", color: "accent", size: 70, top: "62%", left: "8%", rotate: 0 },
+  { id: 3, kind: "square", color: "primary", size: 60, top: "8%", right: "10%", rotate: 12 },
+  { id: 4, kind: "blob", color: "lavender", size: 110, bottom: "10%", right: "6%", rotate: 8 },
+  { id: 5, kind: "semicircle", color: "accent", size: 80, bottom: "20%", left: "45%", rotate: 160 },
+  { id: 6, kind: "circle", color: "primary", size: 50, top: "40%", right: "20%", rotate: 0 },
+];
+
+const colorClass: Record<DoodleShape["color"], string> = {
+  primary: "bg-primary",
+  secondary: "bg-secondary",
+  accent: "bg-accent",
+  lavender: "bg-lavender",
+};
+
+function renderShape(shape: DoodleShape, ref: (el: HTMLDivElement | null) => void) {
+  const base = "absolute neo-border will-change-transform";
+  const style = {
+    top: shape.top,
+    bottom: shape.bottom,
+    left: shape.left,
+    right: shape.right,
+    width: shape.size,
+    height: shape.size,
+  };
+
+  if (shape.kind === "circle") {
+    return (
+      <div
+        key={shape.id}
+        ref={ref}
+        className={`${base} ${colorClass[shape.color]} rounded-full`}
+        style={style}
+      />
+    );
+  }
+
+  if (shape.kind === "square") {
+    return (
+      <div
+        key={shape.id}
+        ref={ref}
+        className={`${base} ${colorClass[shape.color]} rounded-xl`}
+        style={style}
+      />
+    );
+  }
+
+  if (shape.kind === "semicircle") {
+    return (
+      <div
+        key={shape.id}
+        ref={ref}
+        className={`${base} ${colorClass[shape.color]}`}
+        style={{ ...style, borderRadius: "9999px 9999px 0 0" }}
+      />
+    );
+  }
+
+  // blob
+  return (
+    <div
+      key={shape.id}
+      ref={ref}
+      className={`${base} ${colorClass[shape.color]}`}
+      style={{ ...style, borderRadius: "42% 58% 63% 37% / 41% 44% 56% 59%" }}
+    />
+  );
 }
 
 export function FloatingShapes() {
-  const [shapes, setShapes] = useState<Shape[]>([]);
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shapeRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Space-themed colors for nebulae and celestial objects
-    const darkNebulaColors = [
-      "rgba(138, 43, 226, 0.15)", // Purple
-      "rgba(65, 105, 225, 0.15)", // Royal blue
-      "rgba(220, 20, 60, 0.15)", // Crimson
-      "rgba(75, 0, 130, 0.15)", // Indigo
-      "rgba(0, 191, 255, 0.15)", // Deep sky blue
-    ];
+    const ctx = gsap.context(() => {
+      shapeRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const shape = shapes[index];
 
-    const lightNebulaColors = [
-      "rgba(37, 99, 235, 0.1)", // Blue
-      "rgba(79, 70, 229, 0.1)", // Indigo
-      "rgba(147, 51, 234, 0.1)", // Purple
-      "rgba(219, 39, 119, 0.1)", // Pink
-      "rgba(59, 130, 246, 0.1)", // Light blue
-    ];
+        gsap.set(el, { rotate: shape.rotate });
 
-    const darkPlanetColors = [
-      "rgba(176, 224, 230, 0.4)", // Powder blue
-      "rgba(255, 160, 122, 0.4)", // Light salmon
-      "rgba(152, 251, 152, 0.4)", // Pale green
-      "rgba(238, 130, 238, 0.4)", // Violet
-    ];
-
-    const lightPlanetColors = [
-      "rgba(30, 64, 175, 0.3)", // Dark blue
-      "rgba(79, 70, 229, 0.3)", // Indigo
-      "rgba(147, 51, 234, 0.3)", // Purple
-      "rgba(219, 39, 119, 0.3)", // Pink
-    ];
-
-    const nebulaColors = isDark ? darkNebulaColors : lightNebulaColors;
-    const planetColors = isDark ? darkPlanetColors : lightPlanetColors;
-
-    const types: ("nebula" | "planet" | "comet")[] = [
-      "nebula",
-      "nebula",
-      "nebula",
-      "planet",
-      "comet",
-    ];
-
-    const newShapes: Shape[] = [];
-
-    // Create nebulae (larger, more blurred shapes)
-    for (let i = 0; i < 8; i++) {
-      const type = types[Math.floor(Math.random() * types.length)];
-      const isNebula = type === "nebula";
-      const isPlanet = type === "planet";
-      const isComet = type === "comet";
-
-      newShapes.push({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: isNebula
-          ? Math.random() * 300 + 100
-          : isPlanet
-          ? Math.random() * 60 + 20
-          : Math.random() * 10 + 5,
-        color: isNebula
-          ? nebulaColors[Math.floor(Math.random() * nebulaColors.length)]
-          : planetColors[Math.floor(Math.random() * planetColors.length)],
-        speed: isComet
-          ? Math.random() * 0.5 + 0.3
-          : Math.random() * 0.05 + 0.02,
-        opacity: isNebula
-          ? Math.random() * 0.2 + 0.05
-          : isPlanet
-          ? Math.random() * 0.7 + 0.3
-          : Math.random() * 0.8 + 0.2,
-        blur: isNebula
-          ? Math.random() * 50 + 30
-          : isPlanet
-          ? Math.random() * 3 + 1
-          : 0,
-        type,
-        rotation: Math.random() * 360,
-        rotationSpeed: Math.random() * 0.1 - 0.05,
+        gsap.to(el, {
+          y: `random(-26, 26)`,
+          x: `random(-18, 18)`,
+          rotate: shape.rotate + (index % 2 === 0 ? 14 : -14),
+          duration: 5 + (index % 3),
+          delay: index * 0.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       });
-    }
 
-    setShapes(newShapes);
+      // Gentle parallax that follows the pointer
+      const handlePointerMove = (event: PointerEvent) => {
+        const { innerWidth, innerHeight } = window;
+        const relX = event.clientX / innerWidth - 0.5;
+        const relY = event.clientY / innerHeight - 0.5;
 
-    // Animation loop
-    const interval = setInterval(() => {
-      setShapes((prevShapes) =>
-        prevShapes.map((shape) => ({
-          ...shape,
-          y: (shape.y + shape.speed) % 100,
-          rotation: (shape.rotation + shape.rotationSpeed) % 360,
-        }))
-      );
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [isDark]);
-
-  const renderShape = (shape: Shape) => {
-    const style = {
-      left: `${shape.x}%`,
-      top: `${shape.y}%`,
-      width: `${shape.size}px`,
-      height: `${shape.size}px`,
-      backgroundColor: shape.color,
-      opacity: shape.opacity,
-      filter: `blur(${shape.blur}px)`,
-      transform: `rotate(${shape.rotation}deg)`,
-    };
-
-    if (shape.type === "nebula") {
-      return (
-        <div key={shape.id} className="absolute rounded-full" style={style} />
-      );
-    } else if (shape.type === "planet") {
-      return (
-        <div
-          key={shape.id}
-          className="absolute rounded-full"
-          style={{
-            ...style,
-            boxShadow: `0 0 ${shape.size / 4}px ${shape.color.replace(
-              /[0-9.]+\)$/,
-              "0.6)"
-            )}`,
-          }}
-        />
-      );
-    } else {
-      // Comet
-      const cometStyle = {
-        left: `${shape.x}%`,
-        top: `${shape.y}%`,
-        width: `${shape.size}px`,
-        height: `${shape.size}px`,
-        opacity: shape.opacity,
-        filter: `blur(${shape.blur}px)`,
-        transform: `rotate(${shape.rotation}deg)`,
-        borderRadius: "50% 0 50% 50%",
-        boxShadow: `0 0 ${shape.size}px ${
-          isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(30, 64, 175, 0.8)"
-        }`,
-        background: isDark
-          ? "linear-gradient(45deg, rgba(255,255,255,0.8), rgba(70,131,255,0.4))"
-          : "linear-gradient(45deg, rgba(30,64,175,0.8), rgba(59,130,246,0.4))",
+        shapeRefs.current.forEach((el, index) => {
+          if (!el) return;
+          const depth = ((index % 3) + 1) * 6;
+          gsap.to(el, {
+            xPercent: relX * depth,
+            yPercent: relY * depth,
+            duration: 1.2,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        });
       };
 
-      return <div key={shape.id} className="absolute" style={cometStyle} />;
-    }
-  };
+      window.addEventListener("pointermove", handlePointerMove);
+      return () => window.removeEventListener("pointermove", handlePointerMove);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="fixed inset-0 -z-5 overflow-hidden">
-      {shapes.map(renderShape)}
+    <div
+      ref={containerRef}
+      className="fixed inset-0 -z-10 overflow-hidden opacity-70 dark:opacity-40"
+    >
+      {shapes.map((shape, index) =>
+        renderShape(shape, (el) => {
+          shapeRefs.current[index] = el;
+        })
+      )}
     </div>
   );
 }

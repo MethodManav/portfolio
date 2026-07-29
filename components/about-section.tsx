@@ -1,21 +1,49 @@
+"use client";
+
 import { Briefcase, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+import { Reveal, RevealGroup, RevealItem } from "./reveal";
+
+const timeline = [
+  {
+    Icon: Briefcase,
+    title: "Junior Backend Developer",
+    meta: "2024 - Present • Elemensis Softech LLP.",
+    description:
+      "Leading frontend development for enterprise applications, mentoring junior developers, and implementing best practices.",
+  },
+  {
+    Icon: Briefcase,
+    title: "UI/UX Intern",
+    meta: "2023 - 2024 • Tata Strive",
+    description:
+      "Developed responsive websites and web applications for clients across various industries.",
+  },
+  {
+    Icon: GraduationCap,
+    title: "BCA",
+    meta: "2021 - 2024 • Bhagwan Mahavir University",
+    description:
+      "Specialized in Human-Computer Interaction and Web Technologies.",
+  },
+];
 
 export function AboutSection() {
   return (
     <section id="about" className="py-16">
-      <div className="mb-12 text-center">
-        <h2 className="mb-2 text-3xl font-bold text-foreground md:text-4xl">
+      <Reveal className="mb-12 text-center">
+        <h2 className="mb-2 text-3xl font-extrabold uppercase tracking-tight text-foreground md:text-4xl">
           About Me
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           My journey, experience, and what drives me as a developer.
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid gap-8 md:grid-cols-2">
         {/* Left column - Bio */}
-        <div className="rounded-xl bg-card/30 p-6 backdrop-blur-sm">
-          <h3 className="mb-4 text-xl font-semibold text-foreground">
+        <Reveal y={24} className="rounded-2xl neo-border neo-shadow bg-card p-6">
+          <h3 className="mb-4 text-xl font-bold text-foreground">
             My Story
           </h3>
           <p className="mb-4 text-foreground/80">
@@ -35,66 +63,37 @@ export function AboutSection() {
             developers. I'm constantly learning and evolving my skills to stay
             at the forefront of web development.`}
           </p>
-        </div>
+        </Reveal>
 
         {/* Right column - Timeline */}
-        <div className="rounded-xl bg-card/30 p-6 backdrop-blur-sm">
-          <h3 className="mb-4 text-xl font-semibold text-foreground">
+        <Reveal y={24} delay={0.1} className="rounded-2xl neo-border neo-shadow bg-card p-6">
+          <h3 className="mb-4 text-xl font-bold text-foreground">
             Experience & Education
           </h3>
 
-          <div className="space-y-6">
-            {/* Work Experience */}
-            <div className="relative border-l border-primary/30 pl-6">
-              <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-primary"></div>
-              <div className="mb-1 flex items-center">
-                <Briefcase className="mr-2 h-4 w-4 text-primary" />
-                <h4 className="text-lg font-medium text-foreground">
-                  Junior Backend Developer
-                </h4>
-              </div>
-              <p className="mb-1 text-sm text-primary">
-                2024 - Present • Elemensis Softech LLP.
-              </p>
-              <p className="text-sm text-foreground/80">
-                Leading frontend development for enterprise applications,
-                mentoring junior developers, and implementing best practices.
-              </p>
-            </div>
-
-            <div className="relative border-l border-primary/30 pl-6">
-              <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-primary"></div>
-              <div className="mb-1 flex items-center">
-                <Briefcase className="mr-2 h-4 w-4 text-primary" />
-                <h4 className="text-lg font-medium text-foreground">
-                  UI/UX Intern
-                </h4>
-              </div>
-              <p className="mb-1 text-sm text-primary">
-                2023 - 2024 • Tata Strive
-              </p>
-              <p className="text-sm text-foreground/80">
-                Developed responsive websites and web applications for clients
-                across various industries.
-              </p>
-            </div>
-
-            {/* Education */}
-            <div className="relative border-l border-primary/30 pl-6">
-              <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-primary"></div>
-              <div className="mb-1 flex items-center">
-                <GraduationCap className="mr-2 h-4 w-4 text-primary" />
-                <h4 className="text-lg font-medium text-foreground">BCA</h4>
-              </div>
-              <p className="mb-1 text-sm text-primary">
-                2021 - 2024 • Bhagwan Mahavir University
-              </p>
-              <p className="text-sm text-foreground/80">
-                Specialized in Human-Computer Interaction and Web Technologies.
-              </p>
-            </div>
-          </div>
-        </div>
+          <RevealGroup className="space-y-6">
+            {timeline.map(({ Icon, title, meta, description }) => (
+              <RevealItem
+                key={title}
+                className="relative border-l-[3px] border-border pl-6"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
+                  className="absolute -left-2.5 mt-1.5 h-4 w-4 rounded-full neo-border bg-primary"
+                />
+                <div className="mb-1 flex items-center">
+                  <Icon className="mr-2 h-4 w-4 text-secondary" />
+                  <h4 className="text-lg font-bold text-foreground">{title}</h4>
+                </div>
+                <p className="mb-1 text-sm font-bold text-secondary">{meta}</p>
+                <p className="text-sm text-foreground/80">{description}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </Reveal>
       </div>
     </section>
   );

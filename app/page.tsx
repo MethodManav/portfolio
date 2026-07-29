@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { BackgroundGradient } from "@/components/background-gradient";
-import { ParticlesBackground } from "@/components/particles-background";
 import { FloatingShapes } from "@/components/floating-shapes";
 import { Navbar } from "@/components/navbar";
 import { DeveloperProfile } from "@/components/developer-profile";
@@ -13,20 +10,12 @@ import { SkillsSection } from "@/components/skills-section";
 import { BlogSection } from "@/components/blog-section";
 
 export default function Home() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
     <>
       <Navbar />
       <div className="relative">
         {/* Background elements */}
-        <div className="fixed inset-0 z-0">
-          <BackgroundGradient />
-          {isMounted && <ParticlesBackground />}
+        <div className="fixed inset-0 z-0 bg-background neo-dot-grid">
           <FloatingShapes />
         </div>
 

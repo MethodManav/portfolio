@@ -1,4 +1,5 @@
 import { ProjectCard } from "./project-card";
+import { Reveal, RevealGroup, RevealItem } from "./reveal";
 
 const projects = [
   {
@@ -79,21 +80,23 @@ const projects = [
 export function ProjectsSection() {
   return (
     <section id="projects" className="py-16">
-      <div className="mb-12 text-center">
-        <h2 className="mb-2 text-3xl font-bold text-foreground md:text-4xl">
+      <Reveal className="mb-12 text-center">
+        <h2 className="mb-2 text-3xl font-extrabold uppercase tracking-tight text-foreground md:text-4xl">
           Featured Projects
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           A selection of my recent work, showcasing my skills in web
           development, design, and problem-solving.
         </p>
-      </div>
+      </Reveal>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+      <RevealGroup className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
         {projects.map((project) => (
-          <ProjectCard key={project.title} {...project} />
+          <RevealItem key={project.title}>
+            <ProjectCard {...project} />
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }
